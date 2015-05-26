@@ -1,22 +1,17 @@
-var View = function(){
-	var canvas = document.querySelector("canvas");
-	canvas.width = 800;
-	canvas.height = 600;
+function View(e){
+	this.canvas = document.querySelector("canvas");
+	this.canvas.width = 800;
+	this.canvas.height = 600;
+	this.ctx = 	document.querySelector("canvas").getContext("2d");
+	this.keySpeed = 3;
+}
 
-	var ctx = canvas.getContext("2d");
+View.prototype.init = function(){
+	window.requestAnimationFrame(this.draw);
+}
 
-	var keySpeed = 3;
-
-	//canvas animation 
-	function draw(){
-		ctx.clearRect(0,0,canvas.width,canvas.height);
-
-		drawKeyBoxes();
-
-		window.requestAnimationFrame(draw);
-	}
-
-	var drawKeyBoxes = function(){
+View.prototype.drawKeyBoxes = function(){
+		//canvas animation 
 		for (var i = numOfKeyboxes; i >= 0; i--) {
 			var k = keys[i];
 			k.draw();
@@ -27,11 +22,23 @@ var View = function(){
 				keys.push(generateKeyBox(k.xOffset));
 			}
 		};
-	}
+}
 
-window.requestAnimationFrame(draw);
+View.prototype.draw = function(){
+	this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+
+	drawKeyBoxes();
+
+	window.requestAnimationFrame(this.draw);
 }
 
 View.prototype.showPressed = function(){
 	//blink the line on canvas
+	var width = this.canvas.width;
+	var height = this.canvas.height;
+	this.ctx.fillStyle = '#230929';
+	this.ctx.beginPath();
+	this.ctx.fillRect(0,width - 100,width,height);
+	this.ctx.closePath;
+	this.ctx.beginPath();
 }

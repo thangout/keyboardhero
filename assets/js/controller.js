@@ -3,12 +3,10 @@ var Controller = function(){
 
 	function handleKeyPress(e){
 		//call method checkPressedKey in model 
-		console.log(e);
-		var charCode = e.charCode;
-		if (charCode == 97 ) {
-			alert("ahoj");
-		};
+		// console.log(e);
+		model.handlePressedKey(e.charCode);
 	}
 }
 
 var controller = new Controller();
+var model = new Model();
