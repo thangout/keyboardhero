@@ -5,6 +5,11 @@ var Keybox = function(charCode, xOffset){
 	this.dx = 100;
 	this.dy = 100;
 	this.xOffset = xOffset;
+
+	this.keys = new Array();
+	this.numOfKeyboxes = 3;
+	this.xOffset = 100;
+	this.yOffset = 700;
 }
 
 Keybox.prototype.draw = function(){
@@ -21,4 +26,28 @@ Keybox.prototype.draw = function(){
 		ctx.closePath;
 }
 
+Keybox.prototype.init = function(){
 
+	//Alphabed a - z => <97,122>
+	//Alphabed A - Z => <65,90>
+	//generate key boxex
+	var generateKeyBoxes = function(){
+		for (var i = numOfKeyboxes; i >= 0; i--) {
+			var gCharCode = 97 + Math.round(Math.random() * 25); 
+			var tempKey = new Keybox(gCharCode,xOffset*i);
+			tempKey.y -=  yOffset + Math.round(Math.random() * 600); 
+			keys.push(tempKey);
+		};
+	}
+
+	var generateKeyBox = function(xOffset){
+			var gCharCode = 97 + Math.round(Math.random() * 25); 
+			var tempKey = new Keybox(gCharCode,xOffset);
+			tempKey.y -=  yOffset + Math.round(Math.random() * 600); 
+			return tempKey;
+	}
+}
+
+Keybox.prototype.checkPressedKey = function(charCode){
+	//check pressed key and if it was pressed at right line
+}
