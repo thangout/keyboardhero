@@ -27,16 +27,16 @@ Keybox.prototype.draw = function(){
 }
 
 Keybox.prototype.init = function(){
-
+	ke = this.keys;
 	//Alphabed a - z => <97,122>
 	//Alphabed A - Z => <65,90>
 	//generate key boxex
-	var generateKeyBoxes = function(){
+	function generateKeyBoxes (){
 		for (var i = numOfKeyboxes; i >= 0; i--) {
 			var gCharCode = 97 + Math.round(Math.random() * 25); 
-			var tempKey = new Keybox(gCharCode,xOffset*i);
-			tempKey.y -=  yOffset + Math.round(Math.random() * 600); 
-			keys.push(tempKey);
+			var tempKey = new Keybox(gCharCode,this.xOffset*i);
+			tempKey.y -=  this.yOffset + Math.round(Math.random() * 600); 
+			this.ke.push(tempKey);
 		};
 	}
 
@@ -46,6 +46,8 @@ Keybox.prototype.init = function(){
 			tempKey.y -=  yOffset + Math.round(Math.random() * 600); 
 			return tempKey;
 	}
+
+	generateKeyBoxes();
 }
 
 Keybox.prototype.checkPressedKey = function(charCode){

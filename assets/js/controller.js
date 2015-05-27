@@ -9,4 +9,3 @@ var Controller = function(){
 }
 
 var controller = new Controller();
-var model = new Model();
