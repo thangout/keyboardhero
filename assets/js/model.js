@@ -1,6 +1,6 @@
 var Model = function(){
 	this.view = new View();
-	this.keybox = new Keybox();
+	this.keyboxManager = new KeyboxManager();
 
 }
 

@@ -4,11 +4,8 @@ var Keybox = function(charCode, xOffset){
 	this.y = 0;
 	this.dx = 100;
 	this.dy = 100;
-	this.xOffset = xOffset;
 
-	this.keys = new Array();
-	this.numOfKeyboxes = 3;
-	this.xOffset = 100;
+	this.xOffset = xOffset;
 	this.yOffset = 700;
 }
 
@@ -26,30 +23,31 @@ Keybox.prototype.draw = function(){
 		ctx.closePath;
 }
 
-Keybox.prototype.init = function(){
-	ke = this.keys;
-	//Alphabed a - z => <97,122>
-	//Alphabed A - Z => <65,90>
-	//generate key boxex
-	function generateKeyBoxes (){
-		for (var i = numOfKeyboxes; i >= 0; i--) {
-			var gCharCode = 97 + Math.round(Math.random() * 25); 
-			var tempKey = new Keybox(gCharCode,this.xOffset*i);
-			tempKey.y -=  this.yOffset + Math.round(Math.random() * 600); 
-			this.ke.push(tempKey);
-		};
-	}
-
-	var generateKeyBox = function(xOffset){
-			var gCharCode = 97 + Math.round(Math.random() * 25); 
-			var tempKey = new Keybox(gCharCode,xOffset);
-			tempKey.y -=  yOffset + Math.round(Math.random() * 600); 
-			return tempKey;
-	}
-
-	generateKeyBoxes();
-}
-
 Keybox.prototype.checkPressedKey = function(charCode){
 	//check pressed key and if it was pressed at right line
+}
+
+
+var KeyboxManager =  function(){
+	this.keys = new Array();
+	this.numOfKeyboxes = 3;
+	this.xOffset = 100;
+}
+
+KeyboxManager.prototype.generateKeyBoxes = function(){
+	//Alphabed a - z => <97,122>
+	//Alphabed A - Z => <65,90>
+	for (var i = this.numOfKeyboxes; i >= 0; i--) {
+		var gCharCode = 97 + Math.round(Math.random() * 25); 
+		var tempKey = new Keybox(gCharCode,this.xOffset*i);
+		tempKey.y -=  tempKey.yOffset + Math.round(Math.random() * 600); 
+		this.keys.push(tempKey);
+	};	
+}
+
+KeyboxManager.prototype.generateKeyBox = function(xOffset){
+	var gCharCode = 97 + Math.round(Math.random() * 25); 
+	var tempKey = new Keybox(gCharCode,xOffset);
+	tempKey.y -=  tempKey.yOffset + Math.round(Math.random() * 600); 
+	return tempKey;
 }
