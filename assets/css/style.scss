@@ -1,0 +1,54 @@
+$main-color: #FF5722;
+$complement-color: #E65100;
+
+@mixin transition($transition-property, $transition-time, $method) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	font-family: serif "Georgia";
+}
+
+.row{
+	width: 980px;
+	margin: 0 auto;
+}
+
+canvas{
+	background: #dedede;
+}
+
+.play{
+	font-size: 30px;
+	background: rgba(0,0,0,0);
+	border: 2px solid black;
+	padding: 13px 20px 13px 20px;
+	@include transition(all, 0.2s, ease-in-out);	
+
+	&:hover{
+		background: $main-color;  		
+		border-color: $main-color;  		
+		cursor: pointer;
+	}
+}
+
+header{
+	background: $complement-color;	
+	text-align: center;
+	padding: 80px 0;
+
+	.title{
+		font-size: 7em;	
+		font-weight: normal;
+		color: #fff;
+	}
+}
