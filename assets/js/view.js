@@ -24,14 +24,20 @@ function drawKeyBoxes(){
 		var k = keys[i];
 		ctx.beginPath();
 		ctx.fillStyle = "#000";
-		k.draw();
-		ctx.closePath();
-		k.y += keySpeed;
-		if(k.y > canvas.height){
-			k.y = 0;
-			var oldKey = keys.splice(i,1);
-			keyboxManager.generateKeyBox(k.xOffset);
-		}
+		if (k) {
+			k.draw();
+			ctx.closePath();
+			k.y += keySpeed;
+			if(k.y > canvas.height){
+				k.y = 0;
+				var oldKey = keys.splice(i,1);
+				model.penalizePlayer();
+				keyboxManager.generateKeyBox(k.xOffset);
+			}
+		}else{
+				var xOffset = Math.floor(Math.random() * 4) * 100;
+				keyboxManager.generateKeyBox(xOffset);
+		};
 	};
 }
 

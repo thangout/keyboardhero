@@ -17,3 +17,7 @@ Model.prototype.updateView = function(){
 	this.view.showPressed();
 }
 
+Model.prototype.penalizePlayer = function(){
+	this.player.decreaseScore(1);
+}
+

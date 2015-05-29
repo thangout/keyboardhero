@@ -40,7 +40,7 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 	for (var i = this.numOfKeyboxes; i >= 0; i--) {
 		var gCharCode = 97 + Math.round(Math.random() * 25); 
 		var tempKey = new Keybox(gCharCode,this.xOffset*i);
-		tempKey.y -=  tempKey.yOffset + Math.round(Math.random() * 600); 
+		tempKey.y -=  tempKey.yOffset + Math.ceil(Math.random()*10)*100; 
 		this.keys.push(tempKey);
 	};	
 }
@@ -48,18 +48,40 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 KeyboxManager.prototype.generateKeyBox = function(xOffset){
 	var gCharCode = 97 + Math.round(Math.random() * 25); 
 	var tempKey = new Keybox(gCharCode,xOffset);
-	tempKey.y -=  tempKey.yOffset + Math.round(Math.random() * 600); 
+	tempKey.y -=  tempKey.yOffset + Math.ceil(Math.random()*10) * 100; 
 	this.keys.push(tempKey);
 	return tempKey;
 }
 
 KeyboxManager.prototype.checkCharcode = function(charCode){
 	for (var i = this.keys.length - 1; i >= 0; i--) {
-		var percentageIn = this.keys[i].y+this.keys[i].dx - this.checkBarLine;
-		if(this.keys[i].charCode == charCode && percentageIn > this.percentageInRequired
-			&& percentageIn < this.checkBarLineHeight + this.checkTolerance){
-			return true;	
+		if(this.keys[i].charCode  == charCode && this.checkIn(i)){
+			this.keys.splice(i,1);
+			return true;
 		}
 	};
 	return false;
+}
+
+KeyboxManager.prototype.checkIn = function(i){
+	var percentageIn = this.keys[i].y+this.keys[i].dx - this.checkBarLine;
+	if(percentageIn > this.percentageInRequired
+		&& percentageIn < this.checkBarLineHeight + this.checkTolerance){
+		return true;
+	}
+	return false;
+}
+
+KeyboxManager.prototype.removeKeybox = function(charCode){
+	for (var i =  0; i < this.keys.length; i++) {
+			if (this.keys[i].charCode == charCode) {
+				this.keys.splice(i,1);
+			};
+		};
+}
+
+KeyboxManager.prototype.fixRepetition = function(){
+	while(true){
+		var gCharCode = 97 + Math.round(Math.random() * 25); 
+	}		
 }

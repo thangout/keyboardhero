@@ -16,3 +16,7 @@ Player.prototype.updateInfo = function(checkBool){
 
 	this.accuracy = Math.round((this.successPressed / this.pressed) * 100); 
 }
+
+Player.prototype.decreaseScore = function(val){
+	this.score -= val;
+}
