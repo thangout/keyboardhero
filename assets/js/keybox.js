@@ -38,17 +38,17 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 	//Alphabed a - z => <97,122>
 	//Alphabed A - Z => <65,90>
 	for (var i = this.numOfKeyboxes; i >= 0; i--) {
-		var gCharCode = 97 + Math.round(Math.random() * 25); 
+		var gCharCode = this.generateCharcode(); 
 		var tempKey = new Keybox(gCharCode,this.xOffset*i);
-		tempKey.y -=  tempKey.yOffset + Math.ceil(Math.random()*10)*100; 
+		tempKey.y -= this.generateYOffset(tempKey); 
 		this.keys.push(tempKey);
 	};	
 }
 
 KeyboxManager.prototype.generateKeyBox = function(xOffset){
-	var gCharCode = 97 + Math.round(Math.random() * 25); 
+	var gCharCode = this.generateCharcode(); 
 	var tempKey = new Keybox(gCharCode,xOffset);
-	tempKey.y -=  tempKey.yOffset + Math.ceil(Math.random()*10) * 100; 
+	tempKey.y -= this.generateYOffset(tempKey); 
 	this.keys.push(tempKey);
 	return tempKey;
 }
@@ -80,8 +80,38 @@ KeyboxManager.prototype.removeKeybox = function(charCode){
 		};
 }
 
-KeyboxManager.prototype.fixRepetition = function(){
+KeyboxManager.prototype.generateCharcode = function(){
 	while(true){
+		var repeat = false;
 		var gCharCode = 97 + Math.round(Math.random() * 25); 
+		for (var i = this.keys.length - 1; i >= 0; i--) {
+				if (gCharCode == this.keys[i].charCode) {
+					repeat = true;
+				};
+		};
+
+		if (!repeat) {
+			return gCharCode;
+		};
 	}		
 }
+
+KeyboxManager.prototype.generateYOffset = function(key){
+	while(true){
+		var repeat = false;
+		var gYOffset = key.yOffset + Math.ceil(Math.random()*10)*100; 
+		for (var i = this.keys.length - 1; i >= 0; i--) {
+			var k = this.keys[i];
+			if (k.xOffset == key.xOffset){
+				if (k.yOffset - 20 <= gYOffset && k.yOffset + k.dy + 20 >= gYOffset) {
+					repeat = true;		
+				};	
+			};
+		};
+
+		if (!repeat) {
+			return gYOffset;
+		};
+	}
+}
+
