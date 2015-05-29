@@ -16,6 +16,7 @@ $complement-color: #E65100;
 
 body{
 	font-family: serif "Georgia";
+	font-size: 20px;
 }
 
 .row{
@@ -47,8 +48,17 @@ header{
 	padding: 80px 0;
 
 	.title{
-		font-size: 7em;	
+		font-size: 6em;	
 		font-weight: normal;
 		color: #fff;
 	}
+}
+
+h2{
+	font-size: 3em;	
+	font-weight: normal;
+}
+
+.content{
+
 }
