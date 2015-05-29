@@ -106,6 +106,9 @@ KeyboxManager.prototype.generateYOffset = function(key){
 				if (k.yOffset - 20 <= gYOffset && k.yOffset + k.dy + 20 >= gYOffset) {
 					repeat = true;		
 				};	
+				if (k.yOffset >= gYOffset - 20 && k.yOffset <= gYOffset + key.dy + 20) {
+					repeat = true;		
+				};	
 			};
 		};
 
