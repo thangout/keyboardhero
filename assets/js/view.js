@@ -2,6 +2,8 @@ var View = function(){
 	this.defaultCheckBarColorFalse = "rgba(255,0,0,1)";	 
 	this.defaultCheckBarColorTrue = "rgba(0,255,0,1)";	 
 	this.checkBarColor = "#ff0000";	
+	this.checkBarAlpha = 1;
+	this.dTime = 15;
 }
 
 var model = new Model();
@@ -40,15 +42,13 @@ function drawKeyBoxes(){
 	};
 }
 
-var date = new Date().getMilliseconds();
-var dTime = 0;
 
 function draw(){
 	ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 	drawKeyBoxes();
 
 	model.view.drawCheckBar();
-	if (keyPressed && dTime > 0) {
+	if (keyPressed && model.view.dTime > 0) {
 		model.view.drawPressed();
 	}else{
 		keyPressed = false;
@@ -69,7 +69,8 @@ View.prototype.showPressed = function(checkBool){
 	}else{
 		this.checkBarColor = this.defaultCheckBarColorFalse;	
 	};
-	dTime = 6;
+	this.dTime = 15;
+	this.checkBarAlpha = 1;
 }
 
 View.prototype.drawPressed = function(){
@@ -78,9 +79,14 @@ View.prototype.drawPressed = function(){
 	var barHeight = 100;
 	ctx.beginPath();
 	ctx.fillStyle = this.checkBarColor; 
+	var r = parseInt(ctx.fillStyle.substring(1,3), 16);
+	var g = parseInt(ctx.fillStyle.substring(3,5), 16);
+	var b = parseInt(ctx.fillStyle.substring(5), 16);
+	ctx.fillStyle = "rgba(" + r + "," + g + "," + b + "," + this.checkBarAlpha + ")";	
 	ctx.fillRect(0,height-barHeight,width,barHeight);
 	ctx.closePath();
-	dTime = dTime - 1; 
+	this.dTime -= 1; 
+	this.checkBarAlpha -= 0.05;
 }
 
 View.prototype.drawCheckBar = function(){
