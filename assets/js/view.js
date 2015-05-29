@@ -11,7 +11,6 @@ canvas.width = 800;
 canvas.height = 600;
 var ctx = document.querySelector("canvas").getContext("2d");
 
-var keySpeed = 3;
 var numOfKeyboxes = keyboxManager.numOfKeyboxes;
 keyboxManager.generateKeyBoxes();
 var keys = keyboxManager.keys;
@@ -27,7 +26,7 @@ function drawKeyBoxes(){
 		if (k) {
 			k.draw();
 			ctx.closePath();
-			k.y += keySpeed;
+			k.y += model.keySpeed;
 			if(k.y > canvas.height){
 				k.y = 0;
 				var oldKey = keys.splice(i,1);
