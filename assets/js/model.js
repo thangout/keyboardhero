@@ -11,7 +11,7 @@ var Model = function(){
 * Handle the Pressed Key and updates View 
 */
 Model.prototype.handlePressedKey = function(charCode){
-	if (this.checkCharcode(charCode)) {
+	if (this.checkCharcode(charCode) && this.startGame) {
 		var checkBool = this.keyboxManager.checkCharcode(charCode);
 		this.playSound(checkBool);
 		this.view.showPressed(checkBool);
@@ -38,8 +38,8 @@ Model.prototype.regulateSpeed = function(){
 	for (var i = speedKoef - 1; i >= 0; i--) {
 		this.keySpeed *= 1.05;	
 	};
-	if(this.keySpeed > 7 ){
-		this.keySpeed = 7;
+	if(this.keySpeed > 10 ){
+		this.keySpeed = 10;
 	}
 }
 

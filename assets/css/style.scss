@@ -109,6 +109,16 @@ header{
 	}	
 }
 
+.present__last{
+	padding: 100px 0;
+	h2{
+		font-family: $main-font;
+		margin-bottom: 20px;
+		font-size: 3em;	
+		font-weight: normal;
+	}
+}
+
 .present:nth-child(odd){
 	background: yellow;
 }
@@ -147,4 +157,26 @@ p{
 	position: relative;
 	width: 800px;
 	height: 600px;
+}
+
+footer{
+	padding: 15px;
+	background: #dedede;
+	font-size: 12px;
+}
+
+input[type=email]{
+	width: 450px;	
+	height: 50px;
+	font-size: 24px;
+	padding-top: 8px;
+	padding-bottom: 3px;
+	padding-left: 10px;;
+}
+
+.button__second{
+	&:hover{
+		color: $main-color;
+		background: #000;
+	}
 }

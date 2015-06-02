@@ -52,7 +52,7 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 	for (var i = this.numOfKeyboxes; i >= 0; i--) {
 		var gCharCode = this.generateCharcode(); 
 		var tempKey = new Keybox(gCharCode,this.xOffset*i);
-		tempKey.y -= this.generateYOffset(tempKey); 
+		tempKey.y -= tempKey.y + this.generateYOffset(tempKey); 
 		this.keys.push(tempKey);
 	};	
 }
@@ -63,7 +63,7 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 KeyboxManager.prototype.generateKeyBox = function(xOffset){
 	var gCharCode = this.generateCharcode(); 
 	var tempKey = new Keybox(gCharCode,xOffset);
-	tempKey.y -= this.generateYOffset(tempKey); 
+	tempKey.y -= tempKey.y + this.generateYOffset(tempKey); 
 	this.keys.push(tempKey);
 	return tempKey;
 }
