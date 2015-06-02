@@ -7,6 +7,9 @@ var Player = function(){
 	this.streakRow = 0;
 }
 
+/**
+* Calculates accuracy, score
+*/
 Player.prototype.updateInfo = function(checkBool){
 	this.checkStreak(checkBool);
 	this.pressed += 1; 
@@ -20,10 +23,16 @@ Player.prototype.updateInfo = function(checkBool){
 	this.accuracy = Math.round((this.successPressed / this.pressed) * 100); 
 }
 
+/**
+* Decerase score by given value
+*/
 Player.prototype.decreaseScore = function(val){
 	this.score -= val;
 }
 
+/**
+* Sets bonus according to streaks(successful pressed)
+*/
 Player.prototype.checkStreak = function(checkBool){
 	if (checkBool) {
 		this.streakRow += 1;

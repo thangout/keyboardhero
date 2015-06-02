@@ -1,3 +1,6 @@
+/**
+* Represents the Key 
+*/
 var Keybox = function(charCode, xOffset){
 	this.charCode = charCode; 
 	this.x = 0;
@@ -9,6 +12,9 @@ var Keybox = function(charCode, xOffset){
 	this.yOffset = 700;
 }
 
+/*
+* Draw the key box
+*/
 Keybox.prototype.draw = function(){
 		var dxPosition = this.x + this.xOffset;
 		ctx.save();
@@ -24,6 +30,9 @@ Keybox.prototype.draw = function(){
 		ctx.save();
 }
 
+/**
+* Manages the keyboxes 
+*/
 var KeyboxManager =  function(){
 	this.keys = new Array();
 	this.numOfKeyboxes = 3;
@@ -34,6 +43,9 @@ var KeyboxManager =  function(){
 	this.checkTolerance = 25;
 }
 
+/**
+* Fill the initial array of key boxes
+*/
 KeyboxManager.prototype.generateKeyBoxes = function(){
 	//Alphabed a - z => <97,122>
 	//Alphabed A - Z => <65,90>
@@ -45,6 +57,9 @@ KeyboxManager.prototype.generateKeyBoxes = function(){
 	};	
 }
 
+/**
+* Generates a new keybox 
+*/
 KeyboxManager.prototype.generateKeyBox = function(xOffset){
 	var gCharCode = this.generateCharcode(); 
 	var tempKey = new Keybox(gCharCode,xOffset);
@@ -53,6 +68,9 @@ KeyboxManager.prototype.generateKeyBox = function(xOffset){
 	return tempKey;
 }
 
+/**
+* Check whether the charCode is in the list 
+*/
 KeyboxManager.prototype.checkCharcode = function(charCode){
 	for (var i = this.keys.length - 1; i >= 0; i--) {
 		if(this.keys[i].charCode  == charCode && this.checkIn(i)){
@@ -63,6 +81,9 @@ KeyboxManager.prototype.checkCharcode = function(charCode){
 	return false;
 }
 
+/**
+* Check whether the keybox i is in the check line 
+*/
 KeyboxManager.prototype.checkIn = function(i){
 	var percentageIn = this.keys[i].y+this.keys[i].dx - this.checkBarLine;
 	if(percentageIn > this.percentageInRequired
@@ -72,6 +93,9 @@ KeyboxManager.prototype.checkIn = function(i){
 	return false;
 }
 
+/**
+* Remove keybox from the list 
+*/
 KeyboxManager.prototype.removeKeybox = function(charCode){
 	for (var i =  0; i < this.keys.length; i++) {
 			if (this.keys[i].charCode == charCode) {
@@ -80,6 +104,9 @@ KeyboxManager.prototype.removeKeybox = function(charCode){
 		};
 }
 
+/**
+* Generates a charCode which is not in the list 
+*/
 KeyboxManager.prototype.generateCharcode = function(){
 	while(true){
 		var repeat = false;
@@ -96,6 +123,9 @@ KeyboxManager.prototype.generateCharcode = function(){
 	}		
 }
 
+/**
+* Generates a Y offset  
+*/
 KeyboxManager.prototype.generateYOffset = function(key){
 	while(true){
 		var repeat = false;

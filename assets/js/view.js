@@ -11,7 +11,7 @@ var keyboxManager = model.keyboxManager;
 var canvas = document.querySelector("canvas");
 canvas.width = 800;
 canvas.height = 600;
-var ctx = document.querySelector("canvas").getContext("2d");
+var ctx = canvas.getContext("2d");
 
 var numOfKeyboxes = keyboxManager.numOfKeyboxes;
 keyboxManager.generateKeyBoxes();
@@ -19,6 +19,9 @@ var keys = keyboxManager.keys;
 
 var keyPressed = false;
 
+/**
+* Draws keyboxes and obtain new ones if they disappear
+*/
 function drawKeyBoxes(){
 	//canvas animation 
 	for (var i = numOfKeyboxes; i >= 0; i--) {
@@ -42,7 +45,9 @@ function drawKeyBoxes(){
 	};
 }
 
-
+/**
+* Main draw function
+*/
 function draw(){
 	if (model.startGame) {
 		ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
@@ -63,7 +68,10 @@ function draw(){
 
 window.requestAnimationFrame(draw);
 
-//blink the line on canvas
+
+/**
+* If the key is pressed it draws the bar line either green or red 
+*/
 View.prototype.showPressed = function(checkBool){
 	keyPressed = true;
 	if (checkBool) {
@@ -75,7 +83,9 @@ View.prototype.showPressed = function(checkBool){
 	this.checkBarAlpha = 1;
 }
 
-
+/**
+* Draws the bar check line
+*/
 View.prototype.drawPressed = function(){
 	var width = canvas.width;
 	var height = canvas.height;
@@ -92,6 +102,9 @@ View.prototype.drawPressed = function(){
 	this.checkBarAlpha -= 0.05;
 }
 
+/**
+* Draws the red line
+*/
 View.prototype.drawCheckBar = function(){
 	var width = canvas.width;
 	var height = canvas.height;
@@ -103,6 +116,9 @@ View.prototype.drawCheckBar = function(){
 	ctx.closePath();
 }
 
+/**
+* Draw players status
+*/
 View.prototype.drawPlayerStatus = function(){
 	var statusYOffset = 30;
 	var statusYStart = 50; 
@@ -116,6 +132,9 @@ View.prototype.drawPlayerStatus = function(){
 	ctx.closePath();
 }
 
+/**
+* Starts the animation(game)
+*/
 View.prototype.startGame = function(){
 	window.requestAnimationFrame(draw);
 }

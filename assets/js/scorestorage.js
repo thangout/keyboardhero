@@ -2,6 +2,9 @@ var ScoreStorage = function() {
 	this.storage = localStorage;
 } 
 
+/**
+* Save best score
+*/
 ScoreStorage.prototype.saveScore = function(score){
 	if (!this.storage.getItem("highscore")) {
 		this.storage.setItem("highscore", score);
@@ -13,6 +16,9 @@ ScoreStorage.prototype.saveScore = function(score){
 	};
 }
 
+/**
+* Retrieve best score
+*/
 ScoreStorage.prototype.getScore = function(){
 	if (!this.storage.getItem("highscore")) {
 		return 0;

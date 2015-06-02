@@ -2,11 +2,16 @@ var Controller = function(){
 	this.pauseButton = document.querySelector(".js-pauseButton");	
 }
 
-
+/**
+* Handle key press
+*/
 Controller.prototype.handleKeyPress = function(e){
 		model.handlePressedKey(e.charCode);
 }
 
+/**
+* Handle buttons click  
+*/
 Controller.prototype.handlePlayButton = function(){
 		$(".js-playButton").toggle();
 		$(".js-pauseButton").toggle();
