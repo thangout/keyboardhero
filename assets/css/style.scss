@@ -1,5 +1,7 @@
-$main-color: #FF5722;
-$complement-color: #E65100;
+$main-color: yellow;
+$complement-color: #000;
+$angleLogo: 30deg;
+$main-font: "Georgia";
 
 @mixin transition($transition-property, $transition-time, $method) {
     -webkit-transition: $transition-property $transition-time $method;
@@ -17,6 +19,7 @@ $complement-color: #E65100;
 body{
 	font-family: serif "Georgia";
 	font-size: 20px;
+	line-height: 1.7;
 }
 
 .row{
@@ -28,7 +31,8 @@ canvas{
 	background: #dedede;
 }
 
-.play{
+button{
+	font-family: $main-font;
 	font-size: 30px;
 	background: rgba(0,0,0,0);
 	border: 2px solid black;
@@ -42,23 +46,101 @@ canvas{
 	}
 }
 
+.play{
+	display: block;
+	width: 150px;	
+	height: 80px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -75px;
+	margin-top: -40px;
+}
+
+.pause{
+	font-size: 12px;
+	background: rgba(0,0,0,0);
+	display: block;
+	position: absolute;
+	left: 80%;
+	top: 60%;
+	// margin-left: -75px;
+	// margin-top: -40px;
+}
+
 header{
-	background: $complement-color;	
+	// background: $complement-color;	
 	text-align: center;
 	padding: 80px 0;
 
 	.title{
 		font-size: 6em;	
 		font-weight: normal;
-		color: #fff;
+		// color: #fff;
 	}
 }
 
-h2{
-	font-size: 3em;	
-	font-weight: normal;
-}
 
 .content{
 
+}
+.present{
+	padding: 120px 0;
+
+	h1{
+		font-family: $main-font;
+		margin-bottom: 20px;
+		font-size: 3em;	
+		font-weight: normal;
+	}
+
+	h2{
+		margin-top: 20px;
+		font-size: 1.8em;	
+		font-weight: normal;
+	}
+
+	ul{
+		li{
+			list-style-type: none;
+		}
+	}	
+}
+
+.present:nth-child(odd){
+	background: yellow;
+}
+
+.present:nth-child(even){
+	background: #F4F4F4;
+}
+
+.logo{
+	width: 20%;
+	height: 20%;
+	@include transition(all, 0.2s, ease-in-out);	
+
+	&:hover{
+		-ms-transform: rotate($angleLogo); /* IE 9 */
+	    -webkit-transform: rotate($angleLogo); /* Safari */
+	    transform: rotate($angleLogo);		
+	}
+}
+
+p{
+	margin-top: 30px;
+}
+
+.pointslist{
+	span{
+		border: 1px dotted black;
+		border-radius: 3px;
+		padding: 3px;
+	}
+}
+
+.canvas__container{
+	position: relative;
+	width: 800px;
+	height: 600px;
 }

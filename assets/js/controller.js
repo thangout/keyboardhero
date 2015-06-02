@@ -1,11 +1,23 @@
 var Controller = function(){
-	window.addEventListener("keypress",handleKeyPress);
+	this.pauseButton = document.querySelector(".js-pauseButton");	
+}
 
-	function handleKeyPress(e){
-		//call method checkPressedKey in model 
-		// console.log(e);
+
+Controller.prototype.handleKeyPress = function(e){
 		model.handlePressedKey(e.charCode);
-	}
+}
+
+Controller.prototype.handlePlayButton = function(){
+		$(".js-playButton").toggle();
+		$(".js-pauseButton").toggle();
+		model.handleStartGame();		
 }
 
 var controller = new Controller();
+window.addEventListener("keypress",controller.handleKeyPress.bind(controller));
+
+var playButton = document.querySelector(".js-playButton");
+var pauseButton = document.querySelector(".js-pauseButton");
+
+playButton.addEventListener("click",controller.handlePlayButton);
+pauseButton.addEventListener("click",controller.handlePlayButton);

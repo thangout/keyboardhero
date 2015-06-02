@@ -9,7 +9,6 @@ var Player = function(){
 
 Player.prototype.updateInfo = function(checkBool){
 	this.checkStreak(checkBool);
-	console.log(this.streakRow);
 	this.pressed += 1; 
 	if (checkBool){
 		this.score += 10 * this.scoreBonus;
@@ -48,7 +47,7 @@ Player.prototype.checkStreak = function(checkBool){
 	if(s > 20){
 		this.scoreBonus = 3;
 	}
-	
+
 	if(s < 5){
 		this.scoreBonus = 1;
 	};

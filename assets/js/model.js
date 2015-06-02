@@ -4,10 +4,12 @@ var Model = function(){
 	this.player = new Player();
 	this.storage = new ScoreStorage();
 	this.keySpeed = 3;
+	this.startGame = false;
 }
 
 Model.prototype.handlePressedKey = function(charCode){
 	var checkBool = this.keyboxManager.checkCharcode(charCode);
+	this.playSound(checkBool);
 	this.view.showPressed(checkBool);
 	this.player.updateInfo(checkBool);
 	this.storage.saveScore(this.player.score);
@@ -28,7 +30,24 @@ Model.prototype.regulateSpeed = function(){
 	if(this.keySpeed > 7 ){
 		this.keySpeed = 7;
 	}
+}
 
-	console.log(this.keySpeed);
+Model.prototype.playSound = function(checkBool){
+	if (checkBool) {
+		oscillator.frequency.value = 2000;
+	}else{
+		oscillator.frequency.value = 3200;
+	};	
+
+	setTimeout(function(){oscillator.frequency.value = 0;},150);
+}
+
+Model.prototype.handleStartGame = function(){
+	if (this.startGame == false) {
+		this.startGame = true;
+		this.view.startGame();
+	}else{
+		this.startGame = false;
+	};
 }
 

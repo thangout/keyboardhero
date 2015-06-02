@@ -44,18 +44,20 @@ function drawKeyBoxes(){
 
 
 function draw(){
-	ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
-	drawKeyBoxes();
+	if (model.startGame) {
+		ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+		drawKeyBoxes();
 
-	model.view.drawCheckBar();
-	if (keyPressed && model.view.dTime > 0) {
-		model.view.drawPressed();
-	}else{
-		keyPressed = false;
+		model.view.drawCheckBar();
+		if (keyPressed && model.view.dTime > 0) {
+			model.view.drawPressed();
+		}else{
+			keyPressed = false;
+		};
+
+		model.view.drawPlayerStatus();
+		window.requestAnimationFrame(draw);
 	};
-
-	model.view.drawPlayerStatus();
-	window.requestAnimationFrame(draw);
 }
 
 
@@ -72,6 +74,7 @@ View.prototype.showPressed = function(checkBool){
 	this.dTime = 15;
 	this.checkBarAlpha = 1;
 }
+
 
 View.prototype.drawPressed = function(){
 	var width = canvas.width;
@@ -101,12 +104,18 @@ View.prototype.drawCheckBar = function(){
 }
 
 View.prototype.drawPlayerStatus = function(){
+	var statusYOffset = 30;
+	var statusYStart = 50; 
 	ctx.beginPath();		
 	ctx.fillStyle = '#000000';
 	ctx.font="20px Georgia";
-	ctx.fillText("Best score: " + model.storage.getScore(),600,20);
-	ctx.fillText("Score: " + model.player.score,600,50);
-	ctx.fillText("Accuracy: " + model.player.accuracy +"%",600,80);
-	ctx.fillText("Score bonus: " + model.player.scoreBonus +"x",600,110);
+	ctx.fillText("Best score: " + model.storage.getScore(),600,statusYStart);
+	ctx.fillText("Score: " + model.player.score,600,statusYStart + statusYOffset*1);
+	ctx.fillText("Accuracy: " + model.player.accuracy +"%",600,statusYStart + statusYOffset*2);
+	ctx.fillText("Score bonus: " + model.player.scoreBonus +"x",600,statusYStart + statusYOffset*3);
 	ctx.closePath();
+}
+
+View.prototype.startGame = function(){
+	window.requestAnimationFrame(draw);
 }
