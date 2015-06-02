@@ -107,5 +107,6 @@ View.prototype.drawPlayerStatus = function(){
 	ctx.fillText("Best score: " + model.storage.getScore(),600,20);
 	ctx.fillText("Score: " + model.player.score,600,50);
 	ctx.fillText("Accuracy: " + model.player.accuracy +"%",600,80);
+	ctx.fillText("Score bonus: " + model.player.scoreBonus +"x",600,110);
 	ctx.closePath();
 }
